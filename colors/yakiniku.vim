@@ -226,6 +226,8 @@ exe 'hi SpellRare'     s:fg s:b3 s:bg s:n0
 " ---------------------
 " - Specific settings -
 " ---------------------
+exe 'hi JavaScriptEmbed' s:fg s:g4 s:bg s:n1
+
 exe 'hi EasyMotionShadeDefault' s:fg s:n2 s:bg s:n0
 exe 'hi EasyMotionTarget' s:fg s:b4 s:bg s:n0
 exe 'hi EasyMotionTarget2First' s:fg s:g4 s:bg s:n0
