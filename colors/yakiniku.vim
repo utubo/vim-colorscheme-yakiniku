@@ -1,6 +1,5 @@
-" Yakiniku
+" * yakiniku *
 " Author: utubo
-" GitHub: https://github.com/utubo
 " Notes:
 " Thx: This is based on https://github.com/ggalindezb/vim_colorscheme_template
 
@@ -13,8 +12,8 @@ let g:colors_name = s:colors_name
 let s:background = &background
 
 " COLORS
-"   <color-type><opacity>
-" color-type:
+"   <type><opacity>
+" type:
 "   n: normal
 "   b: positiv1(blue)
 "   g: positiv2(green)
@@ -85,7 +84,6 @@ else
 endif
 
 if &background == 'light'
-  let s:background = 'light'
   let [s:n0, s:n1, s:n3, s:n4] = [s:n4, s:n3, s:n1, s:n0]
   let [s:b1, s:b3, s:b4] = [s:b3, s:b1, s:b9]
   let [s:g1, s:g3, s:g4] = [s:g3, s:g1, s:g9]
@@ -228,19 +226,33 @@ exe 'hi SpellRare'     s:fg s:b3 s:bg s:n0
 " ---------------------
 exe 'hi JavaScriptEmbed' s:fg s:g4 s:bg s:n1
 
+" Easy motion
 exe 'hi EasyMotionShadeDefault' s:fg s:n2 s:bg s:n0
 exe 'hi EasyMotionTarget' s:fg s:b4 s:bg s:n0
 exe 'hi EasyMotionTarget2First' s:fg s:g4 s:bg s:n0
 hi! link EasyMotionTarget2Second EasyMotionTarget2First
 
+" ALE
 exe 'hi ALEErrorSign' s:fg s:r4 s:bg s:n1
 exe 'hi ALEWarningSign' s:fg s:y4 s:bg s:n1
+
+" rainbow
+let g:rainbow_conf = get(g:, 'rainbow_conf', {})
+let g:rainbow_conf[s:term.'fgs'] = [s:b4, s:g4, s:y4, s:r4]
+
+" rainbow-csv
+if s:term ==# 'gui'
+  let g:rcsv_colorpairs = [['7', s:b4], ['7', s:g4], ['7', s:y4], ['7', s:r4]]
+else
+  let g:rcsv_colorpairs = [[s:b4, 'Gray'], [s:g4, 'Gray'], [s:y4, 'Gray'], [s:r4, 'Gray']]
+endif
 
 function s:CustomSyntax()
   if g:colors_name != s:colors_name
     exe 'augroup CustomSyntax_' . s:colors_name . '|au!|augroup END'
     return
   endif
+  " GitGutter
   exe 'hi GitGutterAdd' s:fg s:g3 s:bg s:n1
   exe 'hi GitGutterChange' s:fg s:y3 s:bg s:n1
   exe 'hi GitGutterDelete' s:fg s:r3 s:bg s:n1
