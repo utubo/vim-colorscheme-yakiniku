@@ -1,4 +1,4 @@
-" * yakiniku *
+" * 🍖 *
 " Author: utubo
 " Notes:
 " Thx: This is based on https://github.com/ggalindezb/vim_colorscheme_template
@@ -9,7 +9,6 @@ if exists('syntax_on')
 endif
 let s:colors_name = expand('<sfile>:t:r')
 let g:colors_name = s:colors_name
-let s:background = &background
 
 " COLORS
 "   <type><opacity>
@@ -93,10 +92,13 @@ endif
 
 let s:fg     = s:term.'fg='
 let s:bg     = s:term.'bg='
+let s:sp     = s:term ==# 'gui' ? 'guisp=' : 'ctermul='
 let s:style  = s:term.'='
 let s:none   = s:style.'NONE'
 let s:bold   = s:style.'bold'
 let s:italic = s:style.'italic'
+let s:underline = s:style.'underline'
+let s:undercurl = s:style.'undercurl'
 
 " --------
 " - Base -
@@ -147,7 +149,7 @@ hi! link WildMenu Visual
 " --------------
 " - Visual aid -
 " --------------
-exe 'hi MatchParen'    s:fg s:b4 s:bg s:n0
+exe 'hi MatchParen'    s:fg s:b4 s:bg s:n1
 exe 'hi Visual'        s:fg s:n4 s:bg s:b2 s:none
 exe 'hi VisualNOS'     s:fg s:n3 s:bg s:n1 s:none
 exe 'hi NonText'       s:fg s:n1 s:none
@@ -216,10 +218,10 @@ exe 'hi PmenuThumb'    s:bg s:b3
 " ------------
 " - Spelling -
 " ------------
-exe 'hi SpellBad'      s:fg s:r3 s:bg s:r1 s:style 'undercurl'
-exe 'hi SpellCap'      s:fg s:y3 s:bg s:n0 s:style 'undercurl'
-exe 'hi SpellLocal'    s:fg s:g3 s:bg s:n0
-exe 'hi SpellRare'     s:fg s:b3 s:bg s:n0
+exe 'hi SpellBad'      s:fg s:r3 s:bg s:r1 s:sp s:r4 s:undercurl
+exe 'hi SpellCap'      s:fg s:y3 s:bg s:n0 s:sp s:y4 s:undercurl
+exe 'hi SpellLocal'    s:fg s:g3 s:bg s:n0 s:sp s:g4 s:undercurl
+exe 'hi SpellRare'     s:fg s:b3 s:bg s:n0 s:sp s:b4 s:undercurl
 
 " ---------------------
 " - Specific settings -
@@ -263,5 +265,3 @@ endfunction
 
 exe 'augroup CustomSyntax_' . s:colors_name . '|au!|au ColorScheme,Syntax * call <SID>CustomSyntax()|augroup END'
 call s:CustomSyntax()
-
-exe 'set background='.s:background
