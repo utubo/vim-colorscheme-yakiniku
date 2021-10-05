@@ -27,7 +27,7 @@ let g:colors_name = s:colors_name
 "   3: 80% Default FG
 "   4: 100% Highlight (eg. b4=cursor,g4=search)
 "   9: 100% Highlight on &background == 'light'
-if has('gui_running')
+if has('gui_running') || &termguicolors
   let s:term = 'gui'
   let s:n0 = '#2d3037'
   let s:n1 = '#57585a'
@@ -38,7 +38,7 @@ if has('gui_running')
   let s:b2 = '#9d7e53'
   let s:b3 = '#c3985c'
   let s:b4 = '#e9b266'
-  let s:b9 = '#a1702b'
+  let s:b9 = '#e9b266'
   let s:g1 = '#433c39'
   let s:g2 = '#70543d'
   let s:g3 = '#86603f'
@@ -66,7 +66,7 @@ else
   let s:n2 = '248'
   let s:n3 = '252'
   let s:n4 = '230'
-  let s:b1 = '239'
+  let s:b1 = '232'
   let s:b2 = '137'
   let s:b3 = '179'
   let s:b4 = '179'
@@ -235,10 +235,12 @@ exe 'hi SpellRare'     s:fg s:b3 s:bg s:n0 s:sp s:b4 s:undercurl
 " ---------------------
 " - Terminal -
 " ---------------------
-let g:terminal_ansi_colors = [
-\ s:n0, s:r2, s:g2, s:y2, s:b2, s:m2, s:c2, s:n3,
-\ s:n0, s:r4, s:g4, s:y4, s:b4, s:m4, s:c4, s:n4
-\ ]
+if s:term ==# 'gui'
+  let g:terminal_ansi_colors = [
+  \ s:n0, s:r2, s:g2, s:y2, s:b2, s:m2, s:c2, s:n3,
+  \ s:n0, s:r4, s:g4, s:y4, s:b4, s:m4, s:c4, s:n4
+  \ ]
+endif
 
 " ---------------------
 " - Specific settings -
